@@ -35,15 +35,18 @@ export default function VideoGrid() {
       try {
         const response = await fetch("/api/videos");
         const data = await response.json();
-        
+
         if (!response.ok) {
-          throw new Error(data.details || data.error || "Failed to fetch videos");
+          throw new Error(
+            data.details || data.error || "Failed to fetch videos",
+          );
         }
-        
+
         console.log("Fetched videos:", data.videos);
         setVideos(data.videos);
       } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : "Failed to load videos";
+        const errorMessage =
+          err instanceof Error ? err.message : "Failed to load videos";
         console.error("Video fetch error:", errorMessage);
         setError(errorMessage);
       } finally {
