@@ -34,14 +34,18 @@ export default function VideoGrid() {
     async function fetchVideos() {
       try {
         const response = await fetch("/api/videos");
-        if (!response.ok) {
-          throw new Error("Failed to fetch videos");
-        }
         const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.details || data.error || "Failed to fetch videos");
+        }
+        
         console.log("Fetched videos:", data.videos);
         setVideos(data.videos);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to load videos");
+        const errorMessage = err instanceof Error ? err.message : "Failed to load videos";
+        console.error("Video fetch error:", errorMessage);
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
@@ -65,8 +69,16 @@ export default function VideoGrid() {
 
   if (error) {
     return (
-      <div className="border border-white/10 rounded-2xl p-10 text-red-400/70 font-inter text-sm md:text-base tracking-[0.2em] uppercase">
-        Error: {error}
+      <div className="border border-white/10 rounded-2xl p-8 md:p-12 text-red-400/70 font-inter text-sm md:text-base tracking-[0.2em] uppercase space-y-4">
+        <div>⚠️ {error}</div>
+        <div className="text-white/40 text-xs md:text-sm not-uppercase font-light tracking-normal">
+          Make sure:
+          <ul className="list-disc list-inside mt-2 space-y-1">
+            <li>Vercel environment variables are set correctly</li>
+            <li>CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET are configured</li>
+            <li>Your Cloudinary account has uploaded videos</li>
+          </ul>
+        </div>
       </div>
     );
   }

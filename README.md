@@ -1,37 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Isaiah Calibre - Portfolio Website
 
-## Getting Started
+A modern, dark-themed portfolio website for videographer Isaiah Calibre, built with Next.js and integrated with Cloudinary for seamless video delivery.
 
-First, run the development server:
+## Features
+
+- **Hero Section**: Reduced-height hero with video background
+- **Video Grid**: Dynamically loaded videos from Cloudinary with hover-to-play
+- **Video Modal**: Click to play videos with full controls
+- **Photos Tab**: Ready for photo grid implementation
+- **Dark Theme**: Minimalist dark design with elegant typography
+
+## Setup Instructions
+
+### Prerequisites
+
+- Node.js 18+ installed
+- Cloudinary account with videos uploaded
+
+### Local Development
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/bishwo9898/isaiah.git
+cd isaiah
+```
+
+2. Install dependencies
+
+```bash
+npm install
+```
+
+3. Configure environment variables
+
+Copy `.env.example` to `.env.local` and fill in your Cloudinary details:
+
+```bash
+cp .env.example .env.local
+```
+
+Edit `.env.local`:
+
+```
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+```
+
+Get these values from your [Cloudinary Dashboard](https://console.cloudinary.com/console/).
+
+4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment to Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Push your code to GitHub
+2. Connect your repo to [Vercel](https://vercel.com/new)
+3. In Vercel Project Settings → Environment Variables, add:
+   - `CLOUDINARY_API_KEY` (keep it secret)
+   - `CLOUDINARY_API_SECRET` (keep it secret)
+   - `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` (can be public)
 
-## Learn More
+4. Deploy!
 
-To learn more about Next.js, take a look at the following resources:
+**Important**: Make sure the API key and secret are set as **Secret** environment variables in Vercel, not as regular environment variables.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Troubleshooting
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### "Error: Failed to fetch videos" on Vercel
 
-## Deploy on Vercel
+This usually means environment variables are missing. Check:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Vercel Project Settings → Environment Variables
+2. Ensure both `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` are set
+3. Ensure `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` matches your actual cloud name
+4. Redeploy after adding/fixing variables
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# isaiah
+### Videos not playing
+
+- Ensure videos are uploaded to your Cloudinary account
+- Check that your Cloudinary API credentials are correct
+- Videos are accessed via Cloudinary's CDN for optimal performance
+
+## Tech Stack
+
+- **Framework**: Next.js 15
+- **Styling**: Tailwind CSS
+- **Fonts**: Geist, Cormorant Garamond, Inter (from Google Fonts)
+- **Media**: Cloudinary API for dynamic video delivery
+- **Deployment**: Vercel
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── api/videos/route.ts    # Cloudinary videos API endpoint
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   ├── Hero.tsx               # Hero section with video background
+│   ├── Navbar.tsx             # Navigation bar
+│   ├── VideoGrid.tsx          # Dynamic video grid component
+│   └── WorkSection.tsx        # Work section with tabs
+```
+
+## License
+
+All content and code are proprietary to Isaiah Calibre.
