@@ -11,7 +11,10 @@ export default function WorkSection() {
   const [activeTab, setActiveTab] = useState<Tab>("videos");
 
   return (
-    <section className="px-8 md:px-16 lg:px-24 py-16 md:py-20">
+    <section
+      id="work-section"
+      className="px-8 md:px-16 lg:px-24 py-16 md:py-20"
+    >
       <div className="flex items-center justify-between gap-6 flex-wrap">
         <h2 className="text-sm md:text-base font-inter font-light tracking-[0.6em] text-white/70">
           WORK
