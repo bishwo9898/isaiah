@@ -138,7 +138,7 @@ export default function ContactPage() {
                 </h3>
                 <div className="flex gap-6">
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/isaiahcalibre"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-white font-inter text-sm tracking-[0.15em] uppercase hover:text-white/60 transition-all duration-300"

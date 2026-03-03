@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import VideoGrid from "@/components/VideoGrid";
+import PhotoGrid from "@/components/PhotoGrid";
 
 const TABS = ["videos", "photos"] as const;
 
@@ -41,13 +42,7 @@ export default function WorkSection() {
       </div>
 
       <div className="mt-10">
-        {activeTab === "videos" ? (
-          <VideoGrid />
-        ) : (
-          <div className="border border-white/10 rounded-2xl p-10 text-white/60 font-inter text-sm md:text-base tracking-[0.2em] uppercase">
-            Photos coming soon.
-          </div>
-        )}
+        {activeTab === "videos" ? <VideoGrid /> : <PhotoGrid />}
       </div>
     </section>
   );
