@@ -46,6 +46,14 @@ Edit `.env.local`:
 NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
+
+SMTP_HOST=smtp.yourprovider.com
+SMTP_PORT=587
+SMTP_USER=your_smtp_username
+SMTP_PASS=your_smtp_password
+SMTP_FROM_EMAIL=no-reply@yourdomain.com
+SMTP_FROM_NAME=Isaiah Calibre
+CONTACT_ADMIN_EMAIL=admin@yourdomain.com
 ```
 
 Get these values from your [Cloudinary Dashboard](https://console.cloudinary.com/console/).
@@ -115,5 +123,7 @@ src/
 ## License
 
 All content and code are proprietary to Isaiah Calibre.
+
 # isaiah
+
 # isaiah

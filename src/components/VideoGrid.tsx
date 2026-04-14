@@ -140,15 +140,12 @@ function VideoCard({ publicId, title, onClick }: VideoCardProps) {
       onClick={onClick}
       className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.98]"
     >
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      <div className="absolute bottom-4 left-4 z-10 text-sm font-inter uppercase tracking-[0.25em] text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        {title}
-      </div>
+      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
       {/* Play icon overlay */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-        <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center">
+      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+        <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 ease-out shadow-[0_8px_32px_rgba(0,0,0,0.5)] group-hover:bg-white/20 group-hover:border-white/40">
           <svg
-            className="w-6 h-6 text-white ml-1"
+            className="w-6 h-6 md:w-8 md:h-8 text-white ml-1 drop-shadow-xl"
             fill="currentColor"
             viewBox="0 0 24 24"
           >

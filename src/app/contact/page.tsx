@@ -11,20 +11,47 @@ export default function ContactPage() {
     subject: "",
     message: "",
   });
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
+    setErrorMessage("");
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data?.error || "Unable to send your message right now.",
+        );
+      }
+
       setStatus("sent");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+
       setTimeout(() => {
         setStatus("idle");
-        setFormData({ name: "", email: "", subject: "", message: "" });
       }, 3000);
-    }, 1500);
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Unable to send your message right now.",
+      );
+    }
   };
 
   const handleChange = (
@@ -42,7 +69,7 @@ export default function ContactPage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-cormorant font-light tracking-tighter leading-[0.85] text-white mb-6">
-              Let's Create
+              Let&apos;s Create
               <br />
               Together
             </h1>
@@ -106,13 +133,19 @@ export default function ContactPage() {
               <div className="pt-4">
                 <button
                   type="submit"
-                  disabled={status === "sending" || status === "sent"}
+                  disabled={status === "sending"}
                   className="w-full md:w-auto px-12 py-4 bg-white text-black font-inter text-xs tracking-[0.25em] uppercase font-light hover:bg-white/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed rounded-full"
                 >
                   {status === "idle" && "Send Message"}
                   {status === "sending" && "Sending..."}
                   {status === "sent" && "Message Sent!"}
+                  {status === "error" && "Try Again"}
                 </button>
+                {status === "error" && (
+                  <p className="mt-4 text-sm text-red-300 font-inter tracking-[0.05em]">
+                    {errorMessage}
+                  </p>
+                )}
               </div>
             </form>
           </div>
